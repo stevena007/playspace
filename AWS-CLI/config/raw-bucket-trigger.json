@@ -1,0 +1,22 @@
+{
+    "LambdaFunctionConfigurations": [
+        {
+            "Id": "s3eventtriggerslambda",
+            "LambdaFunctionArn": "arn:aws:lambda:ap-southeast-2:000000000000:function:customer-splitter",
+            "Events": [
+                "s3:ObjectCreated:*"
+            ],
+            "Filter": {
+                "Key": {
+                    "FilterRules": [
+                        {
+                            "Name": "prefix",
+                            "Value": "customer-raw/"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+

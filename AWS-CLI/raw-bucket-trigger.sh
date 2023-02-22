@@ -1,0 +1,1 @@
+awslocal s3api put-bucket-notification-configuration --bucket test-bucket-1 --notification-configuration file://config/raw-bucket-trigger.json
