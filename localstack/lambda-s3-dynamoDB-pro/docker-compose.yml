@@ -1,0 +1,22 @@
+services:
+  
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack-pro
+    environment:
+      - HOSTNAME_EXTERNAL=localstack
+      - HOSTNAME=localstack
+      - AWS_DEFAULT_REGION=us-east-1
+      - SERVICES=lambda,s3,dynamodb
+      - EAGER_SERVICE_LOADING=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY-}
+      - SKIP_SSL_CERT_DOWNLOAD=1
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+      - "127.0.0.1:53:53"                # DNS config (required for Pro)
+      - "127.0.0.1:53:53/udp"            # DNS config (required for Pro)
+      - "127.0.0.1:444:443"              # LocalStack HTTPS Gateway (required for Pro)
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
